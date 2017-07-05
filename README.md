@@ -1,7 +1,7 @@
 # NanoDLP-TouchScreen
 Nextion Screen => NodeJS => NanoDLP
 
-# Enable /dev/ttyAMA0 For Raspberry Pi Zero and Raspberry Pi 3
+## Enable /dev/ttyAMA0 For Raspberry Pi Zero and Raspberry Pi 3
 $ sudo raspi-config
 
     => Interfacing Option
