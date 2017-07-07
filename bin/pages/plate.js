@@ -94,7 +94,8 @@ var Plate = function (_abstract) {
                   _this2.setLayer(index);
                 });
 
-                this.set3DView(this.currentViewID);
+                this.setLayer(0);
+                //this.set3DView(this.currentViewID);
 
               case 11:
               case "end":
@@ -188,20 +189,40 @@ var Plate = function (_abstract) {
 
       return resetView;
     }()
+  }, {
+    key: "setLayer",
+    value: function () {
+      var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(index) {
+        var image;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                this.setText("t9", "layer " + index + "/" + this.plate.LayersCount);
+                _context5.next = 3;
+                return this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, index);
 
-    /*
-    async setLayer(index){
-      console.log("this.plate", this.plate);
-      this.setText("t9", "layer "+index+"/"+this.plate.LayersCount);
-      console.log("getImage");
-      let image = await this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, index)
-      console.log(image);
-      
-      await this.nextion.displayBlackWhiteImage(image, 170, 47, 150).catch(e => console.error(e));
-      console.log(imageOK);
-      
-    }*/
+              case 3:
+                image = _context5.sent;
+                _context5.next = 6;
+                return this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(function (e) {
+                  return console.error(e);
+                });
 
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function setLayer(_x3) {
+        return _ref5.apply(this, arguments);
+      }
+
+      return setLayer;
+    }()
   }]);
 
   return Plate;
