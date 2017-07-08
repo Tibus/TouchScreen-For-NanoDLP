@@ -54,14 +54,14 @@ var Projector = function (_abstract) {
                 this.addListener("click_b4", function () {
                   return _this2.nanoDLP.command("/shutter/open");
                 });
-                this.addListener("click_b11", function () {
+                this.addListener("click_b8", function () {
                   return _this2.nanoDLP.command("/shutter/close");
                 });
 
-                this.addListener("click_b12", function () {
+                this.addListener("click_b3", function () {
                   return _this2.nanoDLP.command("/button/press/1");
                 });
-                this.addListener("click_b3", function () {
+                this.addListener("click_b9", function () {
                   return _this2.nanoDLP.command("/button/press/0");
                 });
 

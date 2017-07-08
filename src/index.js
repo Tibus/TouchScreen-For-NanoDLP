@@ -37,8 +37,12 @@ class ScreenManager{
   async update(){
     clearTimeout(this.updateTimeOut);
     
-    let status = await this.nanoDLP.getStatus();
-    let log = await this.nanoDLP.getCurrentLog();
+    let status = await this.nanoDLP.getStatus().catch((e) => {});
+    let log = await this.nanoDLP.getCurrentLog().catch((e) => {});
+    if(!status || !log){
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      return await this.update();
+    }
 
     if(status.Printing !== this.isPrinting){
       this.isPrinting = status.Printing;
@@ -53,8 +57,6 @@ class ScreenManager{
   }
 
   async setPage(page, options){
-    if(this.currentPageId == page)
-      return;
       
     switch (page) {
       case "home":
@@ -65,6 +67,9 @@ class ScreenManager{
         }
         break;
     }
+    
+    if(this.currentPageId == page)
+      return;
     
     console.log("setPage", page, `./pages/${page}.js`);
     try {

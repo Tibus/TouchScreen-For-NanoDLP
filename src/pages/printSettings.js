@@ -29,7 +29,12 @@ export default class PrintSettings extends abstract{
     } catch (e) {
       console.log("error", e);
     }
-
+    
+    this.addListener("click_b4", (e)=>{
+        this.changePage("home");
+    });
+    
+    
     this.addListener("click_b5", (e)=>{
         this.changePage("confirm", {
           text:"Are you sure you want to debug\rprinting?\rIt will move 25mm to the top after\rthe current layer completed and\rcontinue to print."

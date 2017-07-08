@@ -16,10 +16,10 @@ export default class Projector extends abstract{
     });
     
     this.addListener("click_b4", () => this.nanoDLP.command("/shutter/open"));
-    this.addListener("click_b11", () => this.nanoDLP.command("/shutter/close"));
+    this.addListener("click_b8", () => this.nanoDLP.command("/shutter/close"));
     
-    this.addListener("click_b12", () => this.nanoDLP.command("/button/press/1"));
-    this.addListener("click_b3", () => this.nanoDLP.command("/button/press/0"));
+    this.addListener("click_b3", () => this.nanoDLP.command("/button/press/1"));
+    this.addListener("click_b9", () => this.nanoDLP.command("/button/press/0"));
     
     this.addListener("click_b5", () => {
       if(this.status.Projecting)

@@ -153,6 +153,13 @@ var NextionService = function (_EventEmitter) {
                 break;
 
               case 23:
+
+                process.on('SIGINT', function () {
+                  _this2.setPage("connection");
+                  process.exit();
+                });
+
+              case 24:
               case 'end':
                 return _context.stop();
             }

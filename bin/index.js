@@ -94,41 +94,59 @@ var ScreenManager = function () {
                 clearTimeout(this.updateTimeOut);
 
                 _context2.next = 3;
-                return this.nanoDLP.getStatus();
+                return this.nanoDLP.getStatus().catch(function (e) {});
 
               case 3:
                 status = _context2.sent;
                 _context2.next = 6;
-                return this.nanoDLP.getCurrentLog();
+                return this.nanoDLP.getCurrentLog().catch(function (e) {});
 
               case 6:
                 log = _context2.sent;
 
+                if (!(!status || !log)) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                _context2.next = 10;
+                return new Promise(function (resolve) {
+                  return setTimeout(resolve, 2000);
+                });
+
+              case 10:
+                _context2.next = 12;
+                return this.update();
+
+              case 12:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 13:
                 if (!(status.Printing !== this.isPrinting)) {
-                  _context2.next = 11;
+                  _context2.next = 17;
                   break;
                 }
 
                 this.isPrinting = status.Printing;
-                _context2.next = 11;
+                _context2.next = 17;
                 return this.setPage("home");
 
-              case 11:
+              case 17:
                 this.isPrinting = status.Printing;
 
-                _context2.next = 14;
+                _context2.next = 20;
                 return this.currentPage.update(status, log).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 14:
+              case 20:
 
                 clearTimeout(this.updateTimeOut);
                 this.updateTimeOut = setTimeout(function () {
                   return _this2.update();
                 }, 1000);
 
-              case 16:
+              case 22:
               case "end":
                 return _context2.stop();
             }
@@ -151,25 +169,25 @@ var ScreenManager = function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!(this.currentPageId == page)) {
-                  _context3.next = 2;
-                  break;
-                }
-
-                return _context3.abrupt("return");
-
-              case 2:
                 _context3.t0 = page;
-                _context3.next = _context3.t0 === "home" ? 5 : 7;
+                _context3.next = _context3.t0 === "home" ? 3 : 5;
                 break;
 
-              case 5:
+              case 3:
                 if (this.isPrinting) {
                   page = "printingHome";
                 } else {
                   page = "home";
                 }
-                return _context3.abrupt("break", 7);
+                return _context3.abrupt("break", 5);
+
+              case 5:
+                if (!(this.currentPageId == page)) {
+                  _context3.next = 7;
+                  break;
+                }
+
+                return _context3.abrupt("return");
 
               case 7:
 

@@ -421,7 +421,8 @@ var NanoDLPService = function () {
                   uri: "" + this.serverURL + url,
                   method: method,
                   //type: type,
-                  json: type == "json"
+                  json: type == "json",
+                  timeout: 10000
                 });
 
               case 3:

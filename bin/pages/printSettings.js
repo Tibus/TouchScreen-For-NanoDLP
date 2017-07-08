@@ -84,6 +84,10 @@ var PrintSettings = function (_abstract) {
 
               case 19:
 
+                this.addListener("click_b4", function (e) {
+                  _this2.changePage("home");
+                });
+
                 this.addListener("click_b5", function (e) {
                   _this2.changePage("confirm", {
                     text: "Are you sure you want to debug\rprinting?\rIt will move 25mm to the top after\rthe current layer completed and\rcontinue to print.",
@@ -139,7 +143,7 @@ var PrintSettings = function (_abstract) {
 
                 this.setCureTime = false;
 
-              case 24:
+              case 25:
               case "end":
                 return _context2.stop();
             }

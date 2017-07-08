@@ -77,6 +77,11 @@ export default class NextionService extends EventEmitter{
           console.log("error opening port ", config.port, "retry in 2 seconds");
         }
       }
+      
+      process.on('SIGINT', () => {
+        this.setPage("connection");
+        process.exit();
+      });
   }
   
   async setPage(num){

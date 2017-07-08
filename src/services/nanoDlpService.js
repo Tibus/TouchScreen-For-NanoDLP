@@ -87,7 +87,8 @@ export default class NanoDLPService {
       uri: `${this.serverURL}${url}`,
       method: method,
       //type: type,
-      json: type=="json"
+      json: type=="json",
+      timeout: 10000
     })
   }
 }
