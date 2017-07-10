@@ -6,10 +6,6 @@ var _nanoDlpService = require("./services/nanoDlpService.js");
 
 var _nanoDlpService2 = _interopRequireDefault(_nanoDlpService);
 
-var _nextionService = require("./services/nextionService.js");
-
-var _nextionService2 = _interopRequireDefault(_nextionService);
-
 var _config = require("../config.json");
 
 var _config2 = _interopRequireDefault(_config);
@@ -24,49 +20,49 @@ require("babel-polyfill");
 
 global.SERVER_URL = _config2.default.url;
 var nanoDLPService = new _nanoDlpService2.default();
-var nextionService = new _nextionService2.default();
 
 var ScreenManager = function () {
   function ScreenManager() {
-    var _this = this;
-
     _classCallCheck(this, ScreenManager);
 
     this.nanoDLP = nanoDLPService;
-    this.nextion = nextionService;
-    this.isPrinting = null;
+    this.plugins = [];
 
-    this.nextion.on("disconnect", function () {
-      _this.init().catch(function (e) {
-        return console.error(e);
-      });
-    });
+    this.registerPlugin("pushBullet");
   }
 
   _createClass(ScreenManager, [{
     key: "init",
     value: function () {
       var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+        var i;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.isPrinting = null;
-                this.currentPageId = null;
-                if (this.updateTimeOut) clearTimeout(this.updateTimeOut);
+                i = 0;
 
-                _context.next = 5;
-                return this.nextion.connect();
+              case 1:
+                if (!(i < this.plugins.length)) {
+                  _context.next = 7;
+                  break;
+                }
 
-              case 5:
+                _context.next = 4;
+                return this.plugins[i].init();
 
-                console.log("connected");
+              case 4:
+                i++;
+                _context.next = 1;
+                break;
+
+              case 7:
 
                 this.update().catch(function (e) {
                   return console.error(e);
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -84,9 +80,9 @@ var ScreenManager = function () {
     key: "update",
     value: function () {
       var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        var _this2 = this;
+        var _this = this;
 
-        var status, log;
+        var status, log, i;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -122,31 +118,19 @@ var ScreenManager = function () {
                 return _context2.abrupt("return", _context2.sent);
 
               case 13:
-                if (!(status.Printing !== this.isPrinting)) {
-                  _context2.next = 17;
-                  break;
+
+                for (i = 0; i < this.plugins.length; i++) {
+                  this.plugins[i].update(status, log).catch(function (e) {
+                    console.error(e);
+                  });
                 }
-
-                this.isPrinting = status.Printing;
-                _context2.next = 17;
-                return this.setPage("home");
-
-              case 17:
-                this.isPrinting = status.Printing;
-
-                _context2.next = 20;
-                return this.currentPage.update(status, log).catch(function (e) {
-                  return console.error(e);
-                });
-
-              case 20:
 
                 clearTimeout(this.updateTimeOut);
                 this.updateTimeOut = setTimeout(function () {
-                  return _this2.update();
+                  return _this.update();
                 }, 1000);
 
-              case 22:
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -161,90 +145,11 @@ var ScreenManager = function () {
       return update;
     }()
   }, {
-    key: "setPage",
-    value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(page, options) {
-        var PageClass;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.t0 = page;
-                _context3.next = _context3.t0 === "home" ? 3 : 5;
-                break;
-
-              case 3:
-                if (this.isPrinting) {
-                  page = "printingHome";
-                } else {
-                  page = "home";
-                }
-                return _context3.abrupt("break", 5);
-
-              case 5:
-                if (!(this.currentPageId == page)) {
-                  _context3.next = 7;
-                  break;
-                }
-
-                return _context3.abrupt("return");
-
-              case 7:
-
-                console.log("setPage", page, "./pages/" + page + ".js");
-                _context3.prev = 8;
-                PageClass = require("./pages/" + page + ".js").default;
-                _context3.next = 16;
-                break;
-
-              case 12:
-                _context3.prev = 12;
-                _context3.t1 = _context3["catch"](8);
-
-                console.log("page ./pages/" + page + ".js do not exist");
-                return _context3.abrupt("return");
-
-              case 16:
-
-                if (this.currentPage) {
-                  try {
-                    this.currentPage.dispose();
-                  } catch (e) {
-                    console.error(e);
-                  }
-                }
-
-                this.currentPageId = page;
-                this.currentPage = new PageClass(this);
-
-                //await this.nextion.stopRefresh();
-                _context3.next = 21;
-                return new Promise(function (resolve) {
-                  return setTimeout(resolve, 100);
-                });
-
-              case 21:
-                this.currentPage.init(options).catch(function (e) {
-                  return console.error(e);
-                });
-
-                _context3.next = 24;
-                return this.update();
-
-              case 24:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this, [[8, 12]]);
-      }));
-
-      function setPage(_x, _x2) {
-        return _ref3.apply(this, arguments);
-      }
-
-      return setPage;
-    }()
+    key: "registerPlugin",
+    value: function registerPlugin(pluginName) {
+      var plugin = new (require('./plugins/' + pluginName).default)(this);
+      this.plugins.push(plugin);
+    }
   }]);
 
   return ScreenManager;

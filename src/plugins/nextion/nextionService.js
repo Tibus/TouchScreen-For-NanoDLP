@@ -7,7 +7,6 @@ require("babel-polyfill");
 import SerialPort from 'serialport';
 import {EventEmitter} from 'events';
 import sharp from 'sharp';
-import config from '../../config.json';
 
 const NextionEvent = {
   0x00: 'invalidInstruction',
@@ -46,10 +45,11 @@ export default class NextionService extends EventEmitter{
   
   _buffer;
   
-  constructor() {
+  constructor(port) {
     super();
     
     this._buffer = new Buffer([]);
+    this.configPort = port;
   }
   
   async connect(){
@@ -66,7 +66,7 @@ export default class NextionService extends EventEmitter{
             });
           });
           
-          this.port = new SerialPort(config.port, { 
+          this.port = new SerialPort(this.configPort, { 
             autoOpen: false, baudRate:115200});
           await new Promise((resolve, reject) => this.port.open(resolve));
           await new Promise((r)=> setTimeout(r, 1000));
@@ -74,7 +74,7 @@ export default class NextionService extends EventEmitter{
           open = true;
         } catch (e) {
           await new Promise((r)=> setTimeout(r, 1000));
-          console.log("error opening port ", config.port, "retry in 2 seconds");
+          console.log("error opening port ", this.configPort, "retry in 2 seconds");
         }
       }
       

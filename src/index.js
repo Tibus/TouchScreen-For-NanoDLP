@@ -3,33 +3,23 @@
 require("babel-polyfill");
 
 import NanoDLPService from "./services/nanoDlpService.js";
-import NextionService from "./services/nextionService.js";
 import config from "../config.json";
 
 global.SERVER_URL = config.url;
 const nanoDLPService = new NanoDLPService();
-const nextionService = new NextionService();
 
 class ScreenManager{
   constructor(){
     this.nanoDLP = nanoDLPService;
-    this.nextion = nextionService;
-    this.isPrinting = null;
+    this.plugins = [];
     
-    this.nextion.on("disconnect", ()=>{
-      this.init().catch(e=>console.error(e));
-    });
+    this.registerPlugin("pushBullet");
   }
 
   async init(){
-    this.isPrinting = null;
-    this.currentPageId = null;
-    if(this.updateTimeOut)
-      clearTimeout(this.updateTimeOut);
-      
-    await this.nextion.connect();
-    
-    console.log("connected");
+    for (var i = 0; i < this.plugins.length; i++) {
+      await this.plugins[i].init();
+    }
     
     this.update().catch(e=>console.error(e));
   }
@@ -43,59 +33,18 @@ class ScreenManager{
       await new Promise((resolve) => setTimeout(resolve, 2000));
       return await this.update();
     }
-
-    if(status.Printing !== this.isPrinting){
-      this.isPrinting = status.Printing;
-      await this.setPage("home");
-    }
-    this.isPrinting = status.Printing;
     
-    await this.currentPage.update(status, log).catch((e) => console.error(e));
+    for (var i = 0; i < this.plugins.length; i++) {
+      this.plugins[i].update(status, log).catch((e) => {console.error(e);});
+    }
     
     clearTimeout(this.updateTimeOut);
     this.updateTimeOut = setTimeout(()=> this.update(), 1000);
   }
-
-  async setPage(page, options){
-      
-    switch (page) {
-      case "home":
-        if(this.isPrinting){
-          page = "printingHome";
-        }else{
-          page = "home";
-        }
-        break;
-    }
-    
-    if(this.currentPageId == page)
-      return;
-    
-    console.log("setPage", page, `./pages/${page}.js`);
-    try {
-      var PageClass = require(`./pages/${page}.js`).default;
-    } catch (e) {
-      console.log(`page ./pages/${page}.js do not exist`);      
-      return;
-    }
-    
-    if(this.currentPage){
-      try {
-        this.currentPage.dispose();
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    
-    this.currentPageId = page;
-    this.currentPage = new PageClass(this);
-    
-    //await this.nextion.stopRefresh();
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    this.currentPage.init(options).catch(e=>console.error(e));
-    
-    await this.update();
-    //await this.nextion.startRefresh();
+  
+  registerPlugin(pluginName){
+    let plugin = new (require('./plugins/'+pluginName).default)(this);
+    this.plugins.push(plugin);
   }
 }
 

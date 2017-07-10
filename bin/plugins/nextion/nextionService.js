@@ -21,10 +21,6 @@ var _sharp = require('sharp');
 
 var _sharp2 = _interopRequireDefault(_sharp);
 
-var _config = require('../../config.json');
-
-var _config2 = _interopRequireDefault(_config);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -73,12 +69,13 @@ var debug = (0, _debug2.default)('nextion');
 var NextionService = function (_EventEmitter) {
   _inherits(NextionService, _EventEmitter);
 
-  function NextionService() {
+  function NextionService(port) {
     _classCallCheck(this, NextionService);
 
     var _this = _possibleConstructorReturn(this, (NextionService.__proto__ || Object.getPrototypeOf(NextionService)).call(this));
 
     _this._buffer = new Buffer([]);
+    _this.configPort = port;
     return _this;
   }
 
@@ -115,7 +112,7 @@ var NextionService = function (_EventEmitter) {
 
               case 6:
 
-                this.port = new _serialport2.default(_config2.default.port, {
+                this.port = new _serialport2.default(this.configPort, {
                   autoOpen: false, baudRate: 115200 });
                 _context.next = 9;
                 return new Promise(function (resolve, reject) {
@@ -146,7 +143,7 @@ var NextionService = function (_EventEmitter) {
                 });
 
               case 20:
-                console.log("error opening port ", _config2.default.port, "retry in 2 seconds");
+                console.log("error opening port ", this.configPort, "retry in 2 seconds");
 
               case 21:
                 _context.next = 2;
