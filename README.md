@@ -13,6 +13,8 @@ Nextion Screen => NodeJS => NanoDLP
 
 ![hardware.jpg](hardware.jpg)
 
+- put the .tft file on a micro sd card, and plug it in the nextion screen. Power the raspberry pi and the Nextion screen'll automatically update its firmware with the good one (the screen'll go blank with status updating in red). You can then remove the micro sd card from the Nextion Screen (you can use the raspberry pi sd card!)
+
 ## MANDATORY : Enable /dev/ttyAMA0 For Raspberry Pi Zero and Raspberry Pi 3
 	sudo raspi-config
 
@@ -40,7 +42,7 @@ Nextion Screen => NodeJS => NanoDLP
 	sudo reboot
 
 
-#Simple installation
+## Simple installation
 
 On Raspberry pi zero, run : 
 
