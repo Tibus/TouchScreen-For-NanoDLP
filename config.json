@@ -1,11 +1,11 @@
 {
-  "url":"http://192.168.1.22",
+  "url":"http://localhost",
   "plugins":{
     "nextion":{
       "port":"/dev/ttyAMA0"
     },
     "pushbullet":{
-      "apiKey":"o.a59EmgDvPbYR9qjn9yxp60KXtTFN11Pd"
+      "apiKey":null
     }
   }
 }

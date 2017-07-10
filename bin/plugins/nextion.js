@@ -58,18 +58,20 @@ var Confirm = function (_abstract) {
                 this.isPrinting = null;
                 this.currentPageId = null;
 
-                _context.next = 4;
+                console.log("connect to port " + this.config.plugins.nextion.port);
+
+                _context.next = 5;
                 return this.nextion.connect();
 
-              case 4:
+              case 5:
 
                 console.log("connected");
 
-                this.update().catch(function (e) {
+                this.update(this.status, this.log).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -91,29 +93,38 @@ var Confirm = function (_abstract) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (status) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 2:
+
                 this.status = status;
                 this.log = log;
 
                 clearTimeout(this.updateTimeOut);
 
                 if (!(status.Printing !== this.isPrinting)) {
-                  _context2.next = 7;
+                  _context2.next = 9;
                   break;
                 }
 
                 this.isPrinting = status.Printing;
-                _context2.next = 7;
+                _context2.next = 9;
                 return this.setPage("home");
 
-              case 7:
+              case 9:
                 this.isPrinting = status.Printing;
 
-                _context2.next = 10;
+                _context2.next = 12;
                 return this.currentPage.update(status, log).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 10:
+              case 12:
               case "end":
                 return _context2.stop();
             }

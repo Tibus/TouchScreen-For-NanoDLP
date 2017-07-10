@@ -14,6 +14,7 @@ class ScreenManager{
     this.plugins = [];
     
     this.registerPlugin("pushBullet");
+    this.registerPlugin("nextion");
   }
 
   async init(){

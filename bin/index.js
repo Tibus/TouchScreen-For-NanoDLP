@@ -29,6 +29,7 @@ var ScreenManager = function () {
     this.plugins = [];
 
     this.registerPlugin("pushBullet");
+    this.registerPlugin("nextion");
   }
 
   _createClass(ScreenManager, [{

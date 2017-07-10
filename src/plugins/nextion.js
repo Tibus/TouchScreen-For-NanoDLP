@@ -19,15 +19,20 @@ export default class Confirm extends abstract{
     async init(){
       this.isPrinting = null;
       this.currentPageId = null;
-        
+      
+      console.log("connect to port "+this.config.plugins.nextion.port);
+      
       await this.nextion.connect();
       
       console.log("connected");
       
-      this.update().catch(e=>console.error(e));
+      this.update(this.status, this.log).catch(e=>console.error(e));
     }
 
     async update(status, log){
+      if(!status)
+        return
+        
       this.status = status;
       this.log = log;
       
