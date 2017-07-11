@@ -9,7 +9,7 @@ Nextion Screen => NodeJS => NanoDLP
 
 
 ## Hardware installation
-- Connect the raspberry pi to the nextion screen trought the Serial GPIO's : 
+- Connect the raspberry pi to the nextion screen through the Serial GPIO's : 
 
 ![hardware.jpg](hardware.jpg)
 
