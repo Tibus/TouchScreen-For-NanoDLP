@@ -38,6 +38,10 @@ export default class Abstract{
     await this.nextion.setValue(txt, val);
   }
   
+  async getValue(txt){
+    return await this.nextion.getValue(txt);
+  }
+
   async update(status){
 
   }
