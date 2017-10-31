@@ -2,7 +2,8 @@
   "url":"http://localhost",
   "plugins":{
     "nextion":{
-      "port":"/dev/ttyAMA0"
+      "port":"/dev/ttyAMA0",
+      "sleep": 30
     },
     "pushbullet":{
       "apiKey":null
