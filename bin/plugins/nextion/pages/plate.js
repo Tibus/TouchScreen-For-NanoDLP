@@ -63,6 +63,23 @@ var Plate = function (_abstract) {
 
                 this.profile = this.profiles[_lodash2.default.findIndex(this.profiles, { ProfileID: this.plate.ProfileID })];
 
+                _context2.next = 9;
+                return this.nextion.getValue("t12.x");
+
+              case 9:
+                this.imageX = _context2.sent;
+                _context2.next = 12;
+                return this.nextion.getValue("t12.y");
+
+              case 12:
+                this.imageY = _context2.sent;
+                _context2.next = 15;
+                return this.nextion.getValue("t12.w");
+
+              case 15:
+                this.imageWidth = _context2.sent;
+
+
                 this.setText("t0", this.plate.Path);
                 this.setText("t1", this.profile.Title + " (" + this.profile.Depth + "um)");
                 this.setText("t3", this.plate.TotalSolidArea + "ml");
@@ -102,10 +119,10 @@ var Plate = function (_abstract) {
                   _this2.setLayer(index);
                 });
 
-                _context2.next = 17;
+                _context2.next = 26;
                 return this.setLayer(1);
 
-              case 17:
+              case 26:
               case "end":
                 return _context2.stop();
             }
@@ -137,12 +154,18 @@ var Plate = function (_abstract) {
 
               case 4:
                 image = _context3.sent;
-                _context3.next = 7;
-                return this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(function (e) {
+
+                if (!this.enabled) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                _context3.next = 8;
+                return this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -177,12 +200,18 @@ var Plate = function (_abstract) {
 
               case 6:
                 image = _context4.sent;
-                _context4.next = 9;
+
+                if (!this.enabled) {
+                  _context4.next = 10;
+                  break;
+                }
+
+                _context4.next = 10;
                 return this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 9:
+              case 10:
               case "end":
                 return _context4.stop();
             }

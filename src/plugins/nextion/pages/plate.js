@@ -9,9 +9,6 @@ export default class Plate extends abstract{
     super(screenManager);
 
     this.currentViewID = 0;
-    this.imageX = 153;
-    this.imageY = 49; 
-    this.imageW = 167; 
   }
 
   async init(plate){
@@ -21,15 +18,15 @@ export default class Plate extends abstract{
     this.profiles = await this.nanoDLP.getProfiles();
     this.profile = this.profiles[lodash.findIndex(this.profiles, {ProfileID:this.plate.ProfileID})]
 
-    this.imageX = await this.getValue("t12.x").catch(e => console.error(e));
-    this.imageY = await this.getValue("t12.y").catch(e => console.error(e));
-    this.imageW = await this.getValue("t12.w").catch(e => console.error(e));
+    this.imageX = await this.nextion.getValue("t12.x");
+    this.imageY = await this.nextion.getValue("t12.y");
+    this.imageWidth = await this.nextion.getValue("t12.w");
 
     this.setText("t0", this.plate.Path);
     this.setText("t1", `${this.profile.Title} (${this.profile.Depth}um)`);
     this.setText("t3", `${this.plate.TotalSolidArea}ml`);
     this.setText("t7", `${this.plate.LayersCount} layers`);
-    
+
     this.addListener("click_b2", (e)=>{
       this.changePage("plates");
     });
@@ -44,29 +41,30 @@ export default class Plate extends abstract{
     });
     */
     this.gap = 100/(this.plate.LayersCount);
-    
+
     this.addListener("number", (index)=>{
       index = Math.floor((index)/this.gap);
       this.setLayer(index);
     });
-    
+
     await this.setLayer(1);
   }
 
   async set3DView(index){
     await this.setText("t12", "Loading ");
     var image = await this.manager.nanoDLP.getCurrentPlate3DView(this.plate.PlateID, this.currentViewID%4);
-    await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageW).catch(e => console.error(e));
+    if(this.enabled)
+      await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(e => console.error(e));
   }
 
 
   async setLayer(index){
     this.index = index==0?1:index;
-    
+
     await this.setText("t12", `Loading ${this.index}/${this.plate.LayersCount}`);
     this.setText("t9", "layer "+this.index+"/"+this.plate.LayersCount);
     let image = await this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, this.index)
-
-    await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageW).catch(e => console.error(e));
+    if(this.enabled)
+      await this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(e => console.error(e));
   }
 }

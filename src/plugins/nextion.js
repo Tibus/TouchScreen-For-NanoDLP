@@ -9,7 +9,7 @@ export default class Confirm extends abstract{
       
       this.isPrinting = null;
       
-      this.nextion = new NextionService(this.config.plugins.nextion.port);
+      this.nextion = new NextionService(this.config.plugins.nextion);
       
       this.nextion.on("disconnect", ()=>{
         this.init().catch(e=>console.error(e));

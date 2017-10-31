@@ -10,12 +10,10 @@ export default class PrintingHome extends abstract{
 
     this.layerID = -1;
     this.isPause = null;
-    this.imageX = 0;
-    this.imageY = 60;
-    this.imageW = 100;
   }
 
   async init(){
+
     this.addListener("click_b10", (e)=>{
       console.log("printSettings");
       this.changePage("printSettings");
@@ -35,7 +33,7 @@ export default class PrintingHome extends abstract{
     if(!status.Printing){
       return this.changePage("home");
     }
-    
+
     if(this.isPause == null || this.isPause !== status.Pause){
         this.isPause = status.Pause;
         if(this.isPause)
@@ -43,9 +41,9 @@ export default class PrintingHome extends abstract{
         else
           await this.setScreen("printing");
 
-        this.imageX = await this.getValue("m0.x").catch(e => console.error(e));
-        this.imageY = await this.getValue("m0.y").catch(e => console.error(e));
-        this.imageW = await this.getValue("m0.w").catch(e => console.error(e));
+        this.imageX = await this.nextion.getValue("t12.x");
+        this.imageY = await this.nextion.getValue("t12.y");
+        this.imageWidth = await this.nextion.getValue("t12.w");
     }
 
     await this.setText("t6", this.isPause?"Pause":"Printing");
@@ -63,7 +61,8 @@ export default class PrintingHome extends abstract{
       this.history.layer = status.LayerID;
       console.log("setImage", this.history.layer);
       let image = await this.nanoDLP.getCurrentPlateLayer(status.PlateID, status.LayerID)
-      await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageW).catch(e => console.error(e));
+      if(this.enabled)
+        await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(e => console.error(e));
     }
   }
 }

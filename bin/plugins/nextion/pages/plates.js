@@ -47,6 +47,12 @@ var Plates = function (_abstract) {
                 return this.setScreen("plates");
 
               case 2:
+                _context.next = 4;
+                return this.nanoDLP.getPlates();
+
+              case 4:
+                this.plates = _context.sent;
+
 
                 this.addListener("click_b2", function (e) {
                   _this2.changePage("home");
@@ -68,13 +74,6 @@ var Plates = function (_abstract) {
                   _this2.changePage("plate", _this2.plates[_this2.currentIndex + 4]);
                 });
 
-                _context.next = 10;
-                return this.nanoDLP.getPlates();
-
-              case 10:
-                this.plates = _context.sent;
-
-                console.log(this.plates);
                 gap = 100 / (this.plates.length - 4);
 
 
@@ -85,7 +84,7 @@ var Plates = function (_abstract) {
 
                 this.updateList(0);
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }

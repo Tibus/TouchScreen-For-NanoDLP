@@ -12,7 +12,6 @@ export default class ZAxis extends abstract{
 
   async init(options){
     await this.setScreen("zAxis");
-    this.setup = await this.nanoDLP.getSetup();
     
     this.addListener("click_b16", (e)=>{
       this.changePage("home");
@@ -88,6 +87,10 @@ export default class ZAxis extends abstract{
   
   
   async update(status){
+    if(!this.setup){
+      this.setup = await this.nanoDLP.getSetup();
+    }
+    
     let currentMm = status.CurrentHeight/((360/this.setup.MotorDegree*this.setup.MicroStep)/this.setup.LeadscrewPitch);
     let total = this.setup.ZAxisHeight/((360/this.setup.MotorDegree*this.setup.MicroStep)/this.setup.LeadscrewPitch);
     

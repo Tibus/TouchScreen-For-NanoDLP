@@ -21,6 +21,7 @@ var Abstract = function () {
     this.nanoDLP = manager.nanoDLP;
     this.listener = [];
     this.history = {};
+    this.enabled = true;
   }
 
   _createClass(Abstract, [{
@@ -174,6 +175,8 @@ var Abstract = function () {
   }, {
     key: "dispose",
     value: function dispose() {
+      this.enabled = false;
+
       for (var i = 0; i < this.listener.length; i++) {
         this.nextion.removeListener(this.listener[i].btn, this.listener[i].callback);
       }

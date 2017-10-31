@@ -45,11 +45,11 @@ export default class NextionService extends EventEmitter{
   
   _buffer;
   
-  constructor(port) {
+  constructor(config) {
     super();
     
     this._buffer = new Buffer([]);
-    this.configPort = port;
+    this.config = config;
   }
   
   async connect(){
@@ -66,7 +66,7 @@ export default class NextionService extends EventEmitter{
             });
           });
           
-          this.port = new SerialPort(this.configPort, { 
+          this.port = new SerialPort(this.config.port, { 
             autoOpen: false, baudRate:115200});
           await new Promise((resolve, reject) => this.port.open(resolve));
           await new Promise((r)=> setTimeout(r, 1000));
@@ -74,7 +74,7 @@ export default class NextionService extends EventEmitter{
           open = true;
         } catch (e) {
           await new Promise((r)=> setTimeout(r, 1000));
-          console.log("error opening port ", this.configPort, "retry in 2 seconds");
+          console.log("error opening port ", this.config.port, "retry in 2 seconds");
         }
       }
       
@@ -134,8 +134,8 @@ export default class NextionService extends EventEmitter{
   }
   
   async getValue(cmp){
-    var result = await this._writeUart('get '+cmp, true);
-    return (result[1]*256+result[0]);
+    var result = await this._writeUart('get '+cmp);
+    return result;
   }
 
   async displayBlackWhiteImage(buffer, positionX, positionY, width){
@@ -208,6 +208,11 @@ export default class NextionService extends EventEmitter{
     this._writeUart('sleep=0');
     
     await this._writeUart('bkcmd=3');
+
+    await this._writeUart('thup=1');
+    
+    if (this.config.hasOwnProperty("sleep"))
+      await this._writeUart('thsp=' + this.config.sleep);
     
     //await this._writeUart('bauds=115200');
 

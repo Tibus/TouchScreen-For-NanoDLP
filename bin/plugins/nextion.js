@@ -37,7 +37,7 @@ var Confirm = function (_abstract) {
 
     _this.isPrinting = null;
 
-    _this.nextion = new _nextionService2.default(_this.config.plugins.nextion.port);
+    _this.nextion = new _nextionService2.default(_this.config.plugins.nextion);
 
     _this.nextion.on("disconnect", function () {
       _this.init().catch(function (e) {

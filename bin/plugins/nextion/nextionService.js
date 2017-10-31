@@ -69,13 +69,13 @@ var debug = (0, _debug2.default)('nextion');
 var NextionService = function (_EventEmitter) {
   _inherits(NextionService, _EventEmitter);
 
-  function NextionService(port) {
+  function NextionService(config) {
     _classCallCheck(this, NextionService);
 
     var _this = _possibleConstructorReturn(this, (NextionService.__proto__ || Object.getPrototypeOf(NextionService)).call(this));
 
     _this._buffer = new Buffer([]);
-    _this.configPort = port;
+    _this.config = config;
     return _this;
   }
 
@@ -112,7 +112,7 @@ var NextionService = function (_EventEmitter) {
 
               case 6:
 
-                this.port = new _serialport2.default(this.configPort, {
+                this.port = new _serialport2.default(this.config.port, {
                   autoOpen: false, baudRate: 115200 });
                 _context.next = 9;
                 return new Promise(function (resolve, reject) {
@@ -143,7 +143,7 @@ var NextionService = function (_EventEmitter) {
                 });
 
               case 20:
-                console.log("error opening port ", this.configPort, "retry in 2 seconds");
+                console.log("error opening port ", this.config.port, "retry in 2 seconds");
 
               case 21:
                 _context.next = 2;
@@ -610,12 +610,25 @@ var NextionService = function (_EventEmitter) {
                 return this._writeUart('bkcmd=3');
 
               case 5:
+                _context16.next = 7;
+                return this._writeUart('thup=1');
+
+              case 7:
+                if (!this.config.hasOwnProperty("sleep")) {
+                  _context16.next = 10;
+                  break;
+                }
+
+                _context16.next = 10;
+                return this._writeUart('thsp=' + this.config.sleep);
+
+              case 10:
 
                 //await this._writeUart('bauds=115200');
 
                 debug("screenInitialized");
 
-              case 6:
+              case 11:
               case 'end':
                 return _context16.stop();
             }

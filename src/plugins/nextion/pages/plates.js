@@ -11,6 +11,8 @@ export default class Plates extends abstract{
   async init(){
     await this.setScreen("plates");
 
+    this.plates = await this.nanoDLP.getPlates();
+    
     this.addListener("click_b2", (e)=>{
       this.changePage("home");
     });
@@ -31,8 +33,6 @@ export default class Plates extends abstract{
       this.changePage("plate", this.plates[this.currentIndex+4]);
     });
     
-    this.plates = await this.nanoDLP.getPlates();
-    console.log(this.plates);
     let gap = 100/(this.plates.length-4);
     
     this.addListener("number", (scroll)=>{

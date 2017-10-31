@@ -49,12 +49,6 @@ var ZAxis = function (_abstract) {
                 return this.setScreen("zAxis");
 
               case 2:
-                _context.next = 4;
-                return this.nanoDLP.getSetup();
-
-              case 4:
-                this.setup = _context.sent;
-
 
                 this.addListener("click_b16", function (e) {
                   _this2.changePage("home");
@@ -108,7 +102,7 @@ var ZAxis = function (_abstract) {
 
                 this.setBtn(10);
 
-              case 21:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -291,16 +285,28 @@ var ZAxis = function (_abstract) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                currentMm = status.CurrentHeight / (360 / this.setup.MotorDegree * this.setup.MicroStep / this.setup.LeadscrewPitch);
-                total = this.setup.ZAxisHeight / (360 / this.setup.MotorDegree * this.setup.MicroStep / this.setup.LeadscrewPitch);
-                _context6.next = 4;
-                return this.setText("t1", currentMm + "mm");
+                if (this.setup) {
+                  _context6.next = 4;
+                  break;
+                }
+
+                _context6.next = 3;
+                return this.nanoDLP.getSetup();
+
+              case 3:
+                this.setup = _context6.sent;
 
               case 4:
-                _context6.next = 6;
+                currentMm = status.CurrentHeight / (360 / this.setup.MotorDegree * this.setup.MicroStep / this.setup.LeadscrewPitch);
+                total = this.setup.ZAxisHeight / (360 / this.setup.MotorDegree * this.setup.MicroStep / this.setup.LeadscrewPitch);
+                _context6.next = 8;
+                return this.setText("t1", currentMm + "mm");
+
+              case 8:
+                _context6.next = 10;
                 return this.setText("t2", total + "mm");
 
-              case 6:
+              case 10:
               case "end":
                 return _context6.stop();
             }

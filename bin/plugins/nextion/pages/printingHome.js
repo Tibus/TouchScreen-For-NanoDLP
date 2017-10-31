@@ -46,6 +46,7 @@ var PrintingHome = function (_abstract) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+
                 this.addListener("click_b10", function (e) {
                   console.log("printSettings");
                   _this2.changePage("printSettings");
@@ -92,7 +93,7 @@ var PrintingHome = function (_abstract) {
 
               case 2:
                 if (!(this.isPause == null || this.isPause !== status.Pause)) {
-                  _context2.next = 11;
+                  _context2.next = 20;
                   break;
                 }
 
@@ -116,49 +117,72 @@ var PrintingHome = function (_abstract) {
 
               case 11:
                 _context2.next = 13;
-                return this.setText("t6", this.isPause ? "Pause" : "Printing");
+                return this.nextion.getValue("t12.x");
 
               case 13:
-                remaining_time = Math.round((status.LayersCount - status.LayerID) * status.LayerTime / 1000000000 / 60);
-                total_time = Math.round(status.LayersCount * status.LayerTime / 1000000000 / 60);
-                _context2.next = 17;
-                return this.setText("t0", status.LayerID + "/" + status.LayersCount);
+                this.imageX = _context2.sent;
+                _context2.next = 16;
+                return this.nextion.getValue("t12.y");
 
-              case 17:
+              case 16:
+                this.imageY = _context2.sent;
                 _context2.next = 19;
-                return this.setValue("j0", Math.floor(status.LayerID / status.LayersCount * 100));
+                return this.nextion.getValue("t12.w");
 
               case 19:
-                _context2.next = 21;
+                this.imageWidth = _context2.sent;
+
+              case 20:
+                _context2.next = 22;
+                return this.setText("t6", this.isPause ? "Pause" : "Printing");
+
+              case 22:
+                remaining_time = Math.round((status.LayersCount - status.LayerID) * status.LayerTime / 1000000000 / 60);
+                total_time = Math.round(status.LayersCount * status.LayerTime / 1000000000 / 60);
+                _context2.next = 26;
+                return this.setText("t0", status.LayerID + "/" + status.LayersCount);
+
+              case 26:
+                _context2.next = 28;
+                return this.setValue("j0", Math.floor(status.LayerID / status.LayersCount * 100));
+
+              case 28:
+                _context2.next = 30;
                 return this.setText("t1", remaining_time + " of " + total_time + "min");
 
-              case 21:
-                _context2.next = 23;
+              case 30:
+                _context2.next = 32;
                 return this.setText("t2", log.msg);
 
-              case 23:
-                _context2.next = 25;
+              case 32:
+                _context2.next = 34;
                 return this.setText("t7", status.Path);
 
-              case 25:
+              case 34:
                 if (!(this.history.layer != status.LayerID)) {
-                  _context2.next = 33;
+                  _context2.next = 43;
                   break;
                 }
 
                 this.history.layer = status.LayerID;
                 console.log("setImage", this.history.layer);
-                _context2.next = 30;
+                _context2.next = 39;
                 return this.nanoDLP.getCurrentPlateLayer(status.PlateID, status.LayerID);
 
-              case 30:
+              case 39:
                 image = _context2.sent;
-                _context2.next = 33;
-                return this.nextion.displayBlackWhiteImage(image, 0, 60, 150).catch(function (e) {
+
+                if (!this.enabled) {
+                  _context2.next = 43;
+                  break;
+                }
+
+                _context2.next = 43;
+                return this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 33:
+              case 43:
               case "end":
                 return _context2.stop();
             }
