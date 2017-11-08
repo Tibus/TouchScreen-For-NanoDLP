@@ -135,7 +135,7 @@ export default class NextionService extends EventEmitter{
   
   async getValue(cmp){
     var result = await this._writeUart('get '+cmp);
-    return result;
+    return (result[1] * 256 + result[0]);
   }
 
   async displayBlackWhiteImage(buffer, positionX, positionY, width){

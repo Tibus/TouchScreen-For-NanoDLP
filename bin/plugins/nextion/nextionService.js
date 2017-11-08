@@ -472,7 +472,7 @@ var NextionService = function (_EventEmitter) {
 
               case 2:
                 result = _context13.sent;
-                return _context13.abrupt('return', result);
+                return _context13.abrupt('return', result[1] * 256 + result[0]);
 
               case 4:
               case 'end':

@@ -64,17 +64,17 @@ var Plate = function (_abstract) {
                 this.profile = this.profiles[_lodash2.default.findIndex(this.profiles, { ProfileID: this.plate.ProfileID })];
 
                 _context2.next = 9;
-                return this.nextion.getValue("t12.x");
+                return this.getValue("t12.x");
 
               case 9:
                 this.imageX = _context2.sent;
                 _context2.next = 12;
-                return this.nextion.getValue("t12.y");
+                return this.getValue("t12.y");
 
               case 12:
                 this.imageY = _context2.sent;
                 _context2.next = 15;
-                return this.nextion.getValue("t12.w");
+                return this.getValue("t12.w");
 
               case 15:
                 this.imageWidth = _context2.sent;
@@ -136,8 +136,17 @@ var Plate = function (_abstract) {
 
       return init;
     }()
+
+    /*
+    async set3DView(index){
+      await this.setText("t12", "Loading ");
+      var image = await this.manager.nanoDLP.getCurrentPlate3DView(this.plate.PlateID, this.currentViewID%4);
+      if(this.enabled)
+        await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(e => console.error(e));
+    }*/
+
   }, {
-    key: "set3DView",
+    key: "setLayer",
     value: function () {
       var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(index) {
         var image;
@@ -145,27 +154,30 @@ var Plate = function (_abstract) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return this.setText("t12", "Loading ");
+                this.index = index == 0 ? 1 : index;
 
-              case 2:
-                _context3.next = 4;
-                return this.manager.nanoDLP.getCurrentPlate3DView(this.plate.PlateID, this.currentViewID % 4);
+                _context3.next = 3;
+                return this.setText("t12", "Loading " + this.index + "/" + this.plate.LayersCount);
 
-              case 4:
+              case 3:
+                this.setText("t9", "layer " + this.index + "/" + this.plate.LayersCount);
+                _context3.next = 6;
+                return this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, this.index);
+
+              case 6:
                 image = _context3.sent;
 
                 if (!this.enabled) {
-                  _context3.next = 8;
+                  _context3.next = 10;
                   break;
                 }
 
-                _context3.next = 8;
+                _context3.next = 10;
                 return this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(function (e) {
                   return console.error(e);
                 });
 
-              case 8:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -173,54 +185,8 @@ var Plate = function (_abstract) {
         }, _callee3, this);
       }));
 
-      function set3DView(_x2) {
+      function setLayer(_x2) {
         return _ref3.apply(this, arguments);
-      }
-
-      return set3DView;
-    }()
-  }, {
-    key: "setLayer",
-    value: function () {
-      var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(index) {
-        var image;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                this.index = index == 0 ? 1 : index;
-
-                _context4.next = 3;
-                return this.setText("t12", "Loading " + this.index + "/" + this.plate.LayersCount);
-
-              case 3:
-                this.setText("t9", "layer " + this.index + "/" + this.plate.LayersCount);
-                _context4.next = 6;
-                return this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, this.index);
-
-              case 6:
-                image = _context4.sent;
-
-                if (!this.enabled) {
-                  _context4.next = 10;
-                  break;
-                }
-
-                _context4.next = 10;
-                return this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(function (e) {
-                  return console.error(e);
-                });
-
-              case 10:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function setLayer(_x3) {
-        return _ref4.apply(this, arguments);
       }
 
       return setLayer;

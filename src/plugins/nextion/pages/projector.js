@@ -14,7 +14,7 @@ export default class Projector extends abstract{
     this.addListener("click_b2", (e)=>{
       this.changePage("home");
     });
-    
+
     this.addListener("click_b4", () => this.nanoDLP.command("/shutter/open"));
     this.addListener("click_b8", () => this.nanoDLP.command("/shutter/close"));
     

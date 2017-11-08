@@ -152,13 +152,20 @@ var Abstract = function () {
       return setValue;
     }()
   }, {
-    key: "update",
+    key: "getValue",
     value: function () {
-      var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(status) {
+      var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(txt) {
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                _context5.next = 2;
+                return this.nextion.getValue(txt);
+
+              case 2:
+                return _context5.abrupt("return", _context5.sent);
+
+              case 3:
               case "end":
                 return _context5.stop();
             }
@@ -166,8 +173,29 @@ var Abstract = function () {
         }, _callee5, this);
       }));
 
-      function update(_x8) {
+      function getValue(_x8) {
         return _ref5.apply(this, arguments);
+      }
+
+      return getValue;
+    }()
+  }, {
+    key: "update",
+    value: function () {
+      var _ref6 = _asyncToGenerator(regeneratorRuntime.mark(function _callee6(status) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function update(_x9) {
+        return _ref6.apply(this, arguments);
       }
 
       return update;

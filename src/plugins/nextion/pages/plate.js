@@ -18,9 +18,9 @@ export default class Plate extends abstract{
     this.profiles = await this.nanoDLP.getProfiles();
     this.profile = this.profiles[lodash.findIndex(this.profiles, {ProfileID:this.plate.ProfileID})]
 
-    this.imageX = await this.nextion.getValue("t12.x");
-    this.imageY = await this.nextion.getValue("t12.y");
-    this.imageWidth = await this.nextion.getValue("t12.w");
+    this.imageX = await this.getValue("t12.x");
+    this.imageY = await this.getValue("t12.y");
+    this.imageWidth = await this.getValue("t12.w");
 
     this.setText("t0", this.plate.Path);
     this.setText("t1", `${this.profile.Title} (${this.profile.Depth}um)`);
@@ -50,13 +50,13 @@ export default class Plate extends abstract{
     await this.setLayer(1);
   }
 
+  /*
   async set3DView(index){
     await this.setText("t12", "Loading ");
     var image = await this.manager.nanoDLP.getCurrentPlate3DView(this.plate.PlateID, this.currentViewID%4);
     if(this.enabled)
       await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(e => console.error(e));
-  }
-
+  }*/
 
   async setLayer(index){
     this.index = index==0?1:index;
@@ -65,6 +65,6 @@ export default class Plate extends abstract{
     this.setText("t9", "layer "+this.index+"/"+this.plate.LayersCount);
     let image = await this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, this.index)
     if(this.enabled)
-      await this.nextion.displayBlackWhiteImage(image, 153, 49, 167).catch(e => console.error(e));
+      await this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(e => console.error(e));
   }
 }

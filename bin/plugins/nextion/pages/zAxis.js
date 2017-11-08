@@ -50,7 +50,7 @@ var ZAxis = function (_abstract) {
 
               case 2:
 
-                this.addListener("click_b16", function (e) {
+                this.addListener("click_b15", function (e) {
                   _this2.changePage("home");
                 });
 
@@ -96,13 +96,10 @@ var ZAxis = function (_abstract) {
                 this.addListener("click_b14", function () {
                   return _this2.nanoDLP.command("/z-axis/calibrate");
                 });
-                this.addListener("click_b15", function () {
-                  return _this2.nanoDLP.command("/z-axis/touch-limit");
-                });
 
                 this.setBtn(10);
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }
