@@ -19,7 +19,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 require("babel-polyfill");
 
 global.SERVER_URL = _config2.default.url;
-var nanoDLPService = new _nanoDlpService2.default();
+var nanoDLPService = new _nanoDlpService2.default(_config2.default.auth);
 
 var ScreenManager = function () {
   function ScreenManager() {
@@ -35,7 +35,7 @@ var ScreenManager = function () {
   _createClass(ScreenManager, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var i;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -80,7 +80,7 @@ var ScreenManager = function () {
   }, {
     key: "update",
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var _this = this;
 
         var status, log, i;

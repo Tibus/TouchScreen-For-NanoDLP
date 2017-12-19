@@ -39,7 +39,7 @@ var PrintSettings = function (_abstract) {
   _createClass(PrintSettings, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(options) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(options) {
         var _this2 = this;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -114,7 +114,7 @@ var PrintSettings = function (_abstract) {
                 });
 
                 this.addListener("string", function () {
-                  var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee(string) {
+                  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(string) {
                     return regeneratorRuntime.wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
@@ -160,7 +160,7 @@ var PrintSettings = function (_abstract) {
   }, {
     key: "update",
     value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(status) {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(status) {
         var remaining_time, total_time;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {

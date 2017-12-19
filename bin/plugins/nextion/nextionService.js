@@ -82,7 +82,7 @@ var NextionService = function (_EventEmitter) {
   _createClass(NextionService, [{
     key: 'connect',
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this2 = this;
 
         var open;
@@ -173,7 +173,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setPage',
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(num) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(num) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -198,7 +198,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setText',
     value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(cmp, txt) {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(cmp, txt) {
         var text;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -225,7 +225,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setValue',
     value: function () {
-      var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(cmp, txt) {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cmp, txt) {
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -250,7 +250,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'addToWaveForm',
     value: function () {
-      var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(cmp, channel, value) {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(cmp, channel, value) {
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -275,7 +275,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setVis',
     value: function () {
-      var _ref6 = _asyncToGenerator(regeneratorRuntime.mark(function _callee6(cmp, value) {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(cmp, value) {
         var val;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
@@ -302,7 +302,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setLine',
     value: function () {
-      var _ref7 = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(x, y, x2, y2, color) {
+      var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(x, y, x2, y2, color) {
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
@@ -327,7 +327,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setFill',
     value: function () {
-      var _ref8 = _asyncToGenerator(regeneratorRuntime.mark(function _callee8(x, y, width, height, color) {
+      var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(x, y, width, height, color) {
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
@@ -352,7 +352,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'stopRefresh',
     value: function () {
-      var _ref9 = _asyncToGenerator(regeneratorRuntime.mark(function _callee9(cmp, bco) {
+      var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(cmp, bco) {
         return regeneratorRuntime.wrap(function _callee9$(_context9) {
           while (1) {
             switch (_context9.prev = _context9.next) {
@@ -377,7 +377,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'startRefresh',
     value: function () {
-      var _ref10 = _asyncToGenerator(regeneratorRuntime.mark(function _callee10(cmp, bco) {
+      var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(cmp, bco) {
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
@@ -402,7 +402,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'setColor',
     value: function () {
-      var _ref11 = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(cmp, bco) {
+      var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(cmp, bco) {
         return regeneratorRuntime.wrap(function _callee11$(_context11) {
           while (1) {
             switch (_context11.prev = _context11.next) {
@@ -431,7 +431,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'getPage',
     value: function () {
-      var _ref12 = _asyncToGenerator(regeneratorRuntime.mark(function _callee12() {
+      var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
         var page;
         return regeneratorRuntime.wrap(function _callee12$(_context12) {
           while (1) {
@@ -461,7 +461,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'getValue',
     value: function () {
-      var _ref13 = _asyncToGenerator(regeneratorRuntime.mark(function _callee13(cmp) {
+      var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(cmp) {
         var result;
         return regeneratorRuntime.wrap(function _callee13$(_context13) {
           while (1) {
@@ -491,7 +491,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: 'displayBlackWhiteImage',
     value: function () {
-      var _ref14 = _asyncToGenerator(regeneratorRuntime.mark(function _callee15(buffer, positionX, positionY, width) {
+      var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee15(buffer, positionX, positionY, width) {
         var _this3 = this;
 
         var image;
@@ -504,10 +504,10 @@ var NextionService = function (_EventEmitter) {
 
 
                 image.metadata().then(function (metadata) {
-                  image.rotate(metadata.width >= metadata.height ? 0 : 90).resize(width).extractChannel(1
+                  image.rotate(metadata.width >= metadata.height ? 0 : 90).resize(width).extractChannel(1)
                   //.toFile(__dirname+"/../1.min.png");
-                  ).raw().toBuffer(function () {
-                    var _ref15 = _asyncToGenerator(regeneratorRuntime.mark(function _callee14(err, data, info) {
+                  .raw().toBuffer(function () {
+                    var _ref15 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14(err, data, info) {
                       var index, numLine, i, x, currentXColor, j, currentColor;
                       return regeneratorRuntime.wrap(function _callee14$(_context14) {
                         while (1) {
@@ -587,7 +587,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: '_initScreen',
     value: function () {
-      var _ref16 = _asyncToGenerator(regeneratorRuntime.mark(function _callee16() {
+      var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
         var _this4 = this;
 
         return regeneratorRuntime.wrap(function _callee16$(_context16) {
@@ -685,7 +685,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: '_writeUart',
     value: function () {
-      var _ref17 = _asyncToGenerator(regeneratorRuntime.mark(function _callee17(cmd) {
+      var _ref17 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee17(cmd) {
         var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
         return regeneratorRuntime.wrap(function _callee17$(_context17) {
           while (1) {
@@ -722,7 +722,7 @@ var NextionService = function (_EventEmitter) {
   }, {
     key: '_waitForResult',
     value: function () {
-      var _ref18 = _asyncToGenerator(regeneratorRuntime.mark(function _callee18() {
+      var _ref18 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
         var _this5 = this;
 
         return regeneratorRuntime.wrap(function _callee18$(_context18) {

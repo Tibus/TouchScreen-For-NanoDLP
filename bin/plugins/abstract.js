@@ -31,7 +31,7 @@ var AbstractPlugin = function () {
   _createClass(AbstractPlugin, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -52,7 +52,7 @@ var AbstractPlugin = function () {
   }, {
     key: "update",
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(status) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(status) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {

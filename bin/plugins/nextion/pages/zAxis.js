@@ -38,7 +38,7 @@ var ZAxis = function (_abstract) {
   _createClass(ZAxis, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(options) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(options) {
         var _this2 = this;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -116,7 +116,7 @@ var ZAxis = function (_abstract) {
   }, {
     key: "up",
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -140,7 +140,7 @@ var ZAxis = function (_abstract) {
   }, {
     key: "down",
     value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -164,7 +164,7 @@ var ZAxis = function (_abstract) {
   }, {
     key: "move",
     value: function () {
-      var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(direction) {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(direction) {
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -246,7 +246,7 @@ var ZAxis = function (_abstract) {
   }, {
     key: "setBtn",
     value: function () {
-      var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(id) {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(id) {
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -276,7 +276,7 @@ var ZAxis = function (_abstract) {
   }, {
     key: "update",
     value: function () {
-      var _ref6 = _asyncToGenerator(regeneratorRuntime.mark(function _callee6(status) {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(status) {
         var currentMm, total;
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {

@@ -35,7 +35,7 @@ var Confirm = function (_abstract) {
   _createClass(Confirm, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(options) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(options) {
         var _this2 = this;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
