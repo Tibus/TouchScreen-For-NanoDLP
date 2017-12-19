@@ -42,7 +42,7 @@ var Plate = function (_abstract) {
   _createClass(Plate, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(plate) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(plate) {
         var _this2 = this;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -89,7 +89,7 @@ var Plate = function (_abstract) {
                   _this2.changePage("plates");
                 });
 
-                this.addListener("click_b9", _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                this.addListener("click_b9", _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                   return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
@@ -148,7 +148,7 @@ var Plate = function (_abstract) {
   }, {
     key: "setLayer",
     value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(index) {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(index) {
         var image;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {

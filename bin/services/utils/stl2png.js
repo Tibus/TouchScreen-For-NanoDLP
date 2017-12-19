@@ -36,7 +36,7 @@ var STL2PNG = function () {
   _createClass(STL2PNG, [{
     key: "getPNG",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(stl, name, orientation) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(stl, name, orientation) {
         var date;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {

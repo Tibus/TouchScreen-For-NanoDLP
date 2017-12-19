@@ -9,8 +9,18 @@ import debug_ from 'debug';
 const debug = debug_('nanodlp');
 
 export default class NanoDLPService {
-  constructor() {
+  constructor(auth) {
     this.serverURL = global.SERVER_URL;
+    if (auth.enable) {
+      this.auth = true;
+      this.user = auth.user;
+      this.pass = auth.pass;
+      this.session = "";
+      this._getSession();
+    }
+    else {
+      this.auth=false;
+    }
   }
 
 
@@ -27,8 +37,10 @@ export default class NanoDLPService {
   }
   
   async setCureTime(plate, settings){
+    debug(method+": "+url+`${this.auth ? "\tAUTH: "+this.session.split("=")[1] : ""}`);
     return await request({
       uri: `${this.serverURL}/profile/edit/${plate}`,
+      headers:  { Cookie: `${this.auth ?  this.session : ""}`},
       form: settings,
       method: "POST",
     });
@@ -81,11 +93,40 @@ export default class NanoDLPService {
     return await this._request(url, "GET", "");
   }
   
+  async _getSession(type="json"){
+    debug("POST"+": "+"/login");
+    let response = await request({
+      uri: `${this.serverURL}`+"/login",
+      form: {
+        "username": `${this.user}`,
+        "password": `${this.pass}`,
+      },
+      json: type=="json",
+      method: "POST",
+      simple: false,
+      transform: function(body, response, resolveWithFullResponse) {
+                  return {'headers': response.headers, 'data': body};
+                }
+      //timeout: 10000
+    })
+    if (response.headers['location'] == '/') {
+      debug("Auth: Login response: "+ response.headers['set-cookie'][0]);
+      this.session = response.headers['set-cookie'][0];
+      debug("Auth: Setting cookie: "+this.session);
+    }
+    else {
+      debug("Login failed");
+      this.session =  "Error";
+    }
+
+  }
+
   async _request(url, method="GET", type="json"){
-    debug(method+": "+url);
+    debug(method+": "+url+`${this.auth ? "\tAUTH: "+this.session.split("=")[1] : ""}`);
     return await request({
       uri: `${this.serverURL}${url}`,
       method: method,
+      headers:  { Cookie: `${this.auth ?  this.session : ""}`},
       //type: type,
       json: type=="json",
       timeout: 10000

@@ -1,5 +1,10 @@
 {
   "url":"http://localhost",
+  "auth":{
+    "enable":"false",
+    "user":"admin",
+    "pass":"pass"
+  },
   "plugins":{
     "nextion":{
       "port":"/dev/ttyAMA0",

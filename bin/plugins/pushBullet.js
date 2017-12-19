@@ -50,7 +50,7 @@ var PushBulletClass = function (_abstract) {
   _createClass(PushBulletClass, [{
     key: "update",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(status, log) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(status, log) {
         var title;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {

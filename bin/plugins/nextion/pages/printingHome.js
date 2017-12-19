@@ -39,7 +39,7 @@ var PrintingHome = function (_abstract) {
   _createClass(PrintingHome, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this2 = this;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -78,7 +78,7 @@ var PrintingHome = function (_abstract) {
   }, {
     key: "update",
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(status, log) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(status, log) {
         var remaining_time, total_time, image;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {

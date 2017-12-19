@@ -6,7 +6,7 @@ import NanoDLPService from "./services/nanoDlpService.js";
 import config from "../config.json";
 
 global.SERVER_URL = config.url;
-const nanoDLPService = new NanoDLPService();
+const nanoDLPService = new NanoDLPService(config.auth);
 
 class ScreenManager{
   constructor(){
