@@ -13,7 +13,7 @@ export default class ZAxis extends abstract{
   async init(options){
     await this.setScreen("zAxis");
     
-    this.addListener("click_b15", (e)=>{
+    this.addListener("click_b16", (e)=>{
       this.changePage("home");
     });
     
@@ -36,7 +36,8 @@ export default class ZAxis extends abstract{
     
     this.addListener("click_b3", () => this.nanoDLP.command("/z-axis/top"));
     this.addListener("click_b4", () => this.nanoDLP.command("/z-axis/bottom"));
-    this.addListener("click_b14", () => this.nanoDLP.command("/z-axis/calibrate"));
+    this.addListener("click_b14", () => this.nanoDLP.command("/z-axis/touch-limit"));
+    this.addListener("click_b15", () => this.nanoDLP.command("/z-axis/calibrate"));
     
     this.setBtn(10);
   }

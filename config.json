@@ -8,7 +8,12 @@
   "plugins":{
     "nextion":{
       "port":"/dev/ttyAMA0",
-      "sleep": 30
+      "sleep": 65535
+    },
+    "plates":{
+      "fileExt":"stl|slc|svg|zip",
+      "showAll":"false",
+      "autoFetch":"true"
     },
     "pushbullet":{
       "apiKey":null
