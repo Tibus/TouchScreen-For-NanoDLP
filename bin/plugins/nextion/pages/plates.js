@@ -35,7 +35,7 @@ var Plates = function (_abstract) {
   _createClass(Plates, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(options) {
         var _this2 = this;
 
         var gap;
@@ -47,10 +47,24 @@ var Plates = function (_abstract) {
                 return this.setScreen("plates");
 
               case 2:
-                _context.next = 4;
+                if (!(options && options.confirmResult)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                if (!(options.confirmType === "deleteplate" && options.data0)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 6;
+                return this.nanoDLP.command("/plate/delete/" + options.data0);
+
+              case 6:
+                _context.next = 8;
                 return this.nanoDLP.getPlates();
 
-              case 4:
+              case 8:
                 this.plates = _context.sent;
 
 
@@ -58,20 +72,24 @@ var Plates = function (_abstract) {
                   _this2.changePage("home");
                 });
 
+                this.addListener("click_b9", function (e) {
+                  _this2.changePage("addPlate");
+                });
+
                 this.addListener("click_b4", function (e) {
-                  _this2.changePage("plate", _this2.plates[_this2.currentIndex]);
+                  if (_this2.currentIndex + 0 < _this2.plates.length) _this2.changePage("plate", _this2.plates[_this2.currentIndex]);
                 });
                 this.addListener("click_b5", function (e) {
-                  _this2.changePage("plate", _this2.plates[_this2.currentIndex + 1]);
+                  if (_this2.currentIndex + 1 < _this2.plates.length) _this2.changePage("plate", _this2.plates[_this2.currentIndex + 1]);
                 });
                 this.addListener("click_b6", function (e) {
-                  _this2.changePage("plate", _this2.plates[_this2.currentIndex + 2]);
+                  if (_this2.currentIndex + 2 < _this2.plates.length) _this2.changePage("plate", _this2.plates[_this2.currentIndex + 2]);
                 });
                 this.addListener("click_b7", function (e) {
-                  _this2.changePage("plate", _this2.plates[_this2.currentIndex + 3]);
+                  if (_this2.currentIndex + 3 < _this2.plates.length) _this2.changePage("plate", _this2.plates[_this2.currentIndex + 3]);
                 });
                 this.addListener("click_b8", function (e) {
-                  _this2.changePage("plate", _this2.plates[_this2.currentIndex + 4]);
+                  if (_this2.currentIndex + 4 < _this2.plates.length) _this2.changePage("plate", _this2.plates[_this2.currentIndex + 4]);
                 });
 
                 gap = 100 / (this.plates.length - 4);
@@ -84,7 +102,7 @@ var Plates = function (_abstract) {
 
                 this.updateList(0);
 
-              case 14:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -92,7 +110,7 @@ var Plates = function (_abstract) {
         }, _callee, this);
       }));
 
-      function init() {
+      function init(_x) {
         return _ref.apply(this, arguments);
       }
 
@@ -121,7 +139,7 @@ var Plates = function (_abstract) {
         }, _callee2, this);
       }));
 
-      function updateList(_x) {
+      function updateList(_x2) {
         return _ref2.apply(this, arguments);
       }
 

@@ -42,42 +42,42 @@ var Plate = function (_abstract) {
   _createClass(Plate, [{
     key: "init",
     value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(plate) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(plate) {
         var _this2 = this;
 
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return this.setScreen("plate");
 
               case 2:
 
                 this.plate = plate;
-                _context2.next = 5;
+                _context3.next = 5;
                 return this.nanoDLP.getProfiles();
 
               case 5:
-                this.profiles = _context2.sent;
+                this.profiles = _context3.sent;
 
                 this.profile = this.profiles[_lodash2.default.findIndex(this.profiles, { ProfileID: this.plate.ProfileID })];
 
-                _context2.next = 9;
+                _context3.next = 9;
                 return this.getValue("t12.x");
 
               case 9:
-                this.imageX = _context2.sent;
-                _context2.next = 12;
+                this.imageX = _context3.sent;
+                _context3.next = 12;
                 return this.getValue("t12.y");
 
               case 12:
-                this.imageY = _context2.sent;
-                _context2.next = 15;
+                this.imageY = _context3.sent;
+                _context3.next = 15;
                 return this.getValue("t12.w");
 
               case 15:
-                this.imageWidth = _context2.sent;
+                this.imageWidth = _context3.sent;
 
 
                 this.setText("t0", this.plate.Path);
@@ -107,11 +107,33 @@ var Plate = function (_abstract) {
                     }
                   }, _callee, _this2);
                 })));
+
+                this.addListener("click_b15", _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          _this2.changePage("confirm", {
+                            text: "Are you sure you want to delete\rthe following  plate:\r\r" + _this2.plate.Path,
+                            confirmType: "deleteplate",
+                            data0: _this2.plate.PlateID,
+                            returnPage: "plates"
+                          });
+
+                        case 1:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2, _this2);
+                })));
+
                 /*
                 this.addListener("click_b12", (e)=>{
                   this.set3DView(++this.currentViewID);
                 });
                 */
+
                 this.gap = 100 / this.plate.LayersCount;
 
                 this.addListener("number", function (index) {
@@ -119,15 +141,15 @@ var Plate = function (_abstract) {
                   _this2.setLayer(index);
                 });
 
-                _context2.next = 26;
+                _context3.next = 27;
                 return this.setLayer(1);
 
-              case 26:
+              case 27:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function init(_x) {
@@ -148,45 +170,45 @@ var Plate = function (_abstract) {
   }, {
     key: "setLayer",
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(index) {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(index) {
         var image;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 this.index = index == 0 ? 1 : index;
 
-                _context3.next = 3;
+                _context4.next = 3;
                 return this.setText("t12", "Loading " + this.index + "/" + this.plate.LayersCount);
 
               case 3:
                 this.setText("t9", "layer " + this.index + "/" + this.plate.LayersCount);
-                _context3.next = 6;
+                _context4.next = 6;
                 return this.nanoDLP.getCurrentPlateLayer(this.plate.PlateID, this.index);
 
               case 6:
-                image = _context3.sent;
+                image = _context4.sent;
 
                 if (!this.enabled) {
-                  _context3.next = 10;
+                  _context4.next = 10;
                   break;
                 }
 
-                _context3.next = 10;
+                _context4.next = 10;
                 return this.nextion.displayBlackWhiteImage(image, this.imageX, this.imageY, this.imageWidth).catch(function (e) {
                   return console.error(e);
                 });
 
               case 10:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function setLayer(_x2) {
-        return _ref3.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       }
 
       return setLayer;

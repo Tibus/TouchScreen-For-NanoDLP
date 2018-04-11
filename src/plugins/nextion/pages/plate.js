@@ -35,11 +35,22 @@ export default class Plate extends abstract{
       await this.nanoDLP.command("/printer/start/"+this.plate.PlateID);
       this.changePage("home");
     });
+
+    this.addListener("click_b15", async () => {
+      this.changePage("confirm", {
+        text: "Are you sure you want to delete\rthe following  plate:\r\r"+this.plate.Path,
+        confirmType: "deleteplate",
+        data0: this.plate.PlateID,
+        returnPage: "plates"
+      });
+    });
+
     /*
     this.addListener("click_b12", (e)=>{
       this.set3DView(++this.currentViewID);
     });
     */
+
     this.gap = 100/(this.plate.LayersCount);
 
     this.addListener("number", (index)=>{

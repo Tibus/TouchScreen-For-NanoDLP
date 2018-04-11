@@ -43,23 +43,23 @@ var Confirm = function (_abstract) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.setScreen("confirm");
+                return this.setScreen("ipQR");
 
               case 2:
                 _context.next = 4;
-                return this.setText("t0", options.text);
+                return this.setText("t1", options.text);
 
               case 4:
-
-                this.addListener("click_b1", function (e) {
-                  _this2.changePage(options.returnPage, { confirmType: options.confirmType, confirmResult: true, data0: options.data0, data1: options.data1, data2: options.data2 });
-                });
-
-                this.addListener("click_b2", function (e) {
-                  _this2.changePage(options.returnPage, { confirmType: options.confirmType, confirmResult: false, data0: options.data0, data1: options.data1, data2: options.data2 });
-                });
+                _context.next = 6;
+                return this.setText("qr2", options.text);
 
               case 6:
+
+                this.addListener("click_b3", function (e) {
+                  _this2.changePage("home");
+                });
+
+              case 7:
               case "end":
                 return _context.stop();
             }

@@ -8,8 +8,14 @@ export default class Plates extends abstract{
     super(screenManager);
   }
 
-  async init(){
+  async init(options){
     await this.setScreen("plates");
+
+    if (options && options.confirmResult) {
+      if (options.confirmType === "deleteplate" && options.data0) {
+         await this.nanoDLP.command("/plate/delete/"+options.data0);
+      }
+    }
 
     this.plates = await this.nanoDLP.getPlates();
     
@@ -17,20 +23,24 @@ export default class Plates extends abstract{
       this.changePage("home");
     });
     
+    this.addListener("click_b9", (e)=>{
+      this.changePage("addPlate");
+    });
+
     this.addListener("click_b4", (e)=>{
-      this.changePage("plate", this.plates[this.currentIndex]);
+      if ((this.currentIndex+0)<this.plates.length) this.changePage("plate", this.plates[this.currentIndex]);
     });
     this.addListener("click_b5", (e)=>{
-      this.changePage("plate", this.plates[this.currentIndex+1]);
+      if ((this.currentIndex+1)<this.plates.length) this.changePage("plate", this.plates[this.currentIndex+1]);
     });
     this.addListener("click_b6", (e)=>{
-      this.changePage("plate", this.plates[this.currentIndex+2]);
+      if ((this.currentIndex+2)<this.plates.length) this.changePage("plate", this.plates[this.currentIndex+2]);
     });
     this.addListener("click_b7", (e)=>{
-      this.changePage("plate", this.plates[this.currentIndex+3]);
+      if ((this.currentIndex+3)<this.plates.length) this.changePage("plate", this.plates[this.currentIndex+3]);
     });
     this.addListener("click_b8", (e)=>{
-      this.changePage("plate", this.plates[this.currentIndex+4]);
+      if ((this.currentIndex+4)<this.plates.length) this.changePage("plate", this.plates[this.currentIndex+4]);
     });
     
     let gap = 100/(this.plates.length-4);

@@ -38,20 +38,67 @@ var Home = function (_abstract) {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(options) {
         var _this2 = this;
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        var ip, exec;
+        return regeneratorRuntime.wrap(function _callee$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
+                _context2.next = 2;
                 return this.setScreen("home");
 
               case 2:
-                _context.next = 4;
+                _context2.next = 4;
                 return this.setText("t0", "Not Printing");
 
               case 4:
+                ip = require("ip");
+                _context2.next = 7;
+                return this.setText("b6", ip.address());
 
-                if (options) console.log("options", options);
+              case 7:
+                if (!options) {
+                  _context2.next = 23;
+                  break;
+                }
+
+                console.log("options", options);
+
+                if (!options.confirmResult) {
+                  _context2.next = 16;
+                  break;
+                }
+
+                if (!(options.confirmType === "shutdown")) {
+                  _context2.next = 16;
+                  break;
+                }
+
+                exec = require('child_process').exec;
+
+                this.setScreen("progress");
+                this.setText("t0", "Shutdown in progress...");
+                exec('shutdown now', function (error, stdout, stderr) {});
+                return _context2.abrupt("return", _context.stop());
+
+              case 16:
+                if (!options.confirmResult) {
+                  _context2.next = 23;
+                  break;
+                }
+
+                if (!(options.confirmType === "reboot")) {
+                  _context2.next = 23;
+                  break;
+                }
+
+                exec = require('child_process').exec;
+
+                this.setScreen("progress");
+                this.setText("t0", "Reboot in progress...");
+                exec('shutdown -r now', function (error, stdout, stderr) {});
+                return _context2.abrupt("return", _context.stop());
+
+              case 23:
 
                 this.addListener("click_b3", function (e) {
                   _this2.changePage("settings");
@@ -61,9 +108,31 @@ var Home = function (_abstract) {
                   _this2.changePage("plates");
                 });
 
-              case 7:
+                this.addListener("click_b4", function (e) {
+                  _this2.changePage("confirm", {
+                    text: "Are you sure you want to shutdown?",
+                    confirmType: "shutdown",
+                    returnPage: "home"
+                  });
+                });
+
+                this.addListener("click_b5", function (e) {
+                  _this2.changePage("confirm", {
+                    text: "Are you sure you want to reboot?",
+                    confirmType: "reboot",
+                    returnPage: "home"
+                  });
+                });
+
+                this.addListener("click_b6", function (e) {
+                  _this2.changePage("ipqr", {
+                    text: "http://" + ip.address()
+                  });
+                });
+
+              case 28:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
         }, _callee, this);
@@ -79,20 +148,20 @@ var Home = function (_abstract) {
     key: "update",
     value: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(status, log) {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee2$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 if (!status.Printing) {
-                  _context2.next = 2;
+                  _context3.next = 2;
                   break;
                 }
 
-                return _context2.abrupt("return", this.changePage("home"));
+                return _context3.abrupt("return", this.changePage("home"));
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
         }, _callee2, this);
