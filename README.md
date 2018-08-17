@@ -1,4 +1,4 @@
-# NanoDLP-TouchScreen
+# NanoDLP-TouchScreen by Mango3D
 Nextion Screen => NodeJS => NanoDLP
 ![photo.jpg](photo.jpg)
 
